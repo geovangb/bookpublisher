@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="GB_PublisherBook::listing" title="Publisher Book"/>
+                <resource id="GB_PublisherBook::add" title="New Publisher Book"/>
+                <resource id="GB_PublihserBook::upload" title="Upload Logo"/>
+            </resource>
+        </resources>
+    </acl>
+</config>

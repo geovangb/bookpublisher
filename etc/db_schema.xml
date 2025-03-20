@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework/Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="gb_publisher_book" resource="default" engine="innodb" comment="Publisher Book">
+        <column name="entity_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column name="status" xsi:type="boolean" nullable="false" default="1" comment="Status"/>
+        <column name="name" xsi:type="varchar" length="200" nullable="false" comment="Name Publisher"/>
+        <column name="address" xsi:type="text" nullable="false" comment="Endereço"/>
+        <column name="logo" xsi:type="varchar" length="255" nullable="true" comment="Logo Publisher"/>
+        <column name="cnpj" xsi:type="varchar" length="14" nullable="true" comment="CNPJ"/>
+        <column name="create_at" xsi:type="datetime" nullable="true" comment="Created"/>
+        <column name="updated_at" xsi:type="datetime" nullable="true" comment="Update"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+</schema>

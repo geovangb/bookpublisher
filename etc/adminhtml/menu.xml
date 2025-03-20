@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="GB_PublisherBook::listing" sortOrder="10" title="Book Publisher" module="GB_PublisherBook"
+             parent="Magento_Catalog::catalog" resource="GB_PublisherBook::listing" translate="title"
+             action="publisher_book/publisher/grid"/>
+    </menu>
+</config>
