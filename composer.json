@@ -1,0 +1,21 @@
+{
+  "name": "gb/module-publisher-book",
+  "version": "1.0.0",
+  "description": "N/A",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*",
+    "magento/module-ui": "101.2.*"
+  },
+  "license": [
+    "Geovan Brambilla"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "GB\\PublisherBook\\": ""
+    }
+  }
+}
