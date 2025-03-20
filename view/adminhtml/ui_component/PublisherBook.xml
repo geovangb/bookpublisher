@@ -67,19 +67,20 @@
                 </param>
             </childDefaults>
         </settings>
-        <selectionsColumn name="ids">
+        <selectionsColumn name="ids" sortOrder="0">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>
         </selectionsColumn>
-        <column name="entity_id">
-            <settings>
-                <filter>textRange</filter>
-                <label translate="true">ID</label>
-                <sorting>desc</sorting>
-            </settings>
-        </column>
-        <column name="logo" class="GB\PublisherBook\Ui\Component\Listing\Grid\Column\Thumbnail">
+        <actionsColumn name="actions" class="GB\PublisherBook\Ui\Component\Listing\Column\PublisherActions">
+        <settings>
+            <indexField>entity_id</indexField>
+            <resizeEnabled>false</resizeEnabled>
+            <resizeDefaultWidth>107</resizeDefaultWidth>
+        </settings>
+    </actionsColumn>
+        <column name="logo" class="GB\PublisherBook\Ui\Component\Listing\Grid\Column\Thumbnail"
+                component="Magento_Ui/js/grid/columns/thumbnail" displayArea="generalarea">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="component" xsi:type="string" >Magento_Ui/js/grid/columns/thumbnail</item>
@@ -89,14 +90,21 @@
                 </item>
             </argument>
         </column>
-        <column name="name">
+        <column name="name" sortOrder="10">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">Name</label>
                 <sorting>desc</sorting>
             </settings>
         </column>
-        <column name="status">
+        <column name="address" sortOrder="20">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Address</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="status" sortOrder="30">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">Status</label>
@@ -104,5 +112,4 @@
             </settings>
         </column>
     </columns>
-
 </listing>

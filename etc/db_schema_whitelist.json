@@ -1,0 +1,17 @@
+{
+    "gb_publisher_book": {
+        "column": {
+            "entity_id": true,
+            "status": true,
+            "name": true,
+            "address": true,
+            "logo": true,
+            "cnpj": true,
+            "create_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

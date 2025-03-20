@@ -103,17 +103,17 @@ class PublisherRepository implements PublisherRepositoryInterface
     }
 
     /**
-     * @param int $publisherId
+     * @param int $id
      * @return mixed
      * @throws NoSuchEntityException
      */
-    public function getById(int $publisherId): mixed
+    public function getById(int $id): mixed
     {
         $publisher = $this->publisherFactory->create();
-        $this->resource->load($publisher, $publisherId);
+        $publisher->load($id);
 
         if (!$publisher->getId()) {
-            throw new NoSuchEntityException(__('Publisher with id "%1" does not exist.', $publisherId));
+            throw new NoSuchEntityException(__('Publisher with id "%1" does not exist.', $id));
         }
 
         return $publisher;

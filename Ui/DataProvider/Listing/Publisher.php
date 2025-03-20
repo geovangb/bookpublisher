@@ -51,7 +51,7 @@ class Publisher extends AbstractDataProvider
             $img[0]['name'] = $temp['logo'];
             $img[0]['url'] = $baseurl . 'label/icon/' . $temp['logo'];
             $temp['logo'] = $img;
-            $this->loadedData[$item->getId()] =$item->getData();
+            $this->loadedData[$item->getId()] = array_merge($item->getData(), $temp);
         }
 
         return $this->loadedData;

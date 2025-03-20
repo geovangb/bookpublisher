@@ -24,6 +24,17 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
         $this->_init(PublisherResource::class);
     }
 
+    /**
+     * Create class instance with specified parameters
+     *
+     * @param array $data
+     * @return \Magento\Catalog\Model\Product
+     */
+    public function create(array $data = [])
+    {
+        return $this->_objectManager->create($this->_instanceName, $data);
+    }
+
     public function getIdentities()
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
