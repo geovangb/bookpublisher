@@ -7,6 +7,11 @@ Modulo Book Puublisher
 * Select disponível no cadastro de produtos
 * Atributo disponível no Front
 
+Instalação
+
+`composer require gb/publisherbook:dev-main
+`
+
 **GB_PublisherBook 1.0.0
 
 Geovan Brambilla
