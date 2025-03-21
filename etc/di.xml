@@ -33,9 +33,14 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="gb_publisherbook_import_book_publisher" xsi:type="object">
-                    GB\PublisherBook\Console\Command\ImportBookPublisher
-                </item>
+                <item name="gb_publisherbook_import_book_publisher" xsi:type="object">GB\PublisherBook\Console\Command\ImportBookPublisher</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\GraphQl\Query\Resolver\ValueFactory">
+        <arguments>
+            <argument name="resolvers" xsi:type="array">
+                <item name="book_publisher" xsi:type="object">GB\PublisherBook\Model\Resolver\BookPublisherResolver</item>
             </argument>
         </arguments>
     </type>

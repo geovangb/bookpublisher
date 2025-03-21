@@ -22,7 +22,6 @@ interface PublisherInterface
     const ADDRESS = 'address';
     const STATUS = 'status';
     const CNPJ = 'cnpj';
-    const PUBLISHER_ID = 'publisher_id';
     const ENTITY_ID = 'entity_id';
     const LOGO = 'logo';
 
