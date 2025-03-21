@@ -19,9 +19,9 @@ use GB\PublisherBook\Api\Data\PublisherSearchResultsInterface;
 use GB\PublisherBook\Api\Data\PublisherSearchResultsInterfaceFactory;
 use GB\PublisherBook\Api\PublisherRepositoryInterface;
 use GB\PublisherBook\Model\ResourceModel\Publisher as ResourcePublisher;
-use GB\PublisherBook\Model\ResourceModel\Publisher\CollectionFactory as PublisherCollectionFactory;
+use GB\PublisherBook\Model\ResourceModel\Publisher\CollectionFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\Api\SearchCriteriaInterface as SearchCriteriaInterfaceAlias;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -60,28 +60,28 @@ class PublisherRepository implements PublisherRepositoryInterface
     protected PublisherInterfaceFactory $publisherFactory;
 
     /**
-     * @var PublisherCollectionFactory
+     * @var CollectionFactory
      */
-    protected PublisherCollectionFactory $publisherCollectionFactory;
+    protected CollectionFactory $collectionFactory;
 
 
     /**
      * @param ResourcePublisher $resource
      * @param PublisherInterfaceFactory $publisherFactory
-     * @param PublisherCollectionFactory $publisherCollectionFactory
+     * @param CollectionFactory $collectionFactory
      * @param PublisherSearchResultsInterfaceFactory $searchResultsFactory
      * @param CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
         ResourcePublisher $resource,
         PublisherInterfaceFactory $publisherFactory,
-        PublisherCollectionFactory $publisherCollectionFactory,
+        CollectionFactory $collectionFactory,
         PublisherSearchResultsInterfaceFactory $searchResultsFactory,
         CollectionProcessorInterface $collectionProcessor
     ) {
         $this->resource = $resource;
         $this->publisherFactory = $publisherFactory;
-        $this->publisherCollectionFactory = $publisherCollectionFactory;
+        $this->collectionFactory = $collectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->collectionProcessor = $collectionProcessor;
     }
@@ -89,7 +89,7 @@ class PublisherRepository implements PublisherRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function save(PublisherInterface $publisher)
+    public function save(PublisherInterface $publisher): PublisherInterface
     {
         try {
             $this->resource->save($publisher);
@@ -122,27 +122,15 @@ class PublisherRepository implements PublisherRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getList(
-        SearchCriteriaInterfaceAlias $searchCriteria
-    ): PublisherSearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria): PublisherSearchResultsInterface
     {
-        $collection = $this->publisherCollectionFactory->create();
-
+        $searchResult = $this->searchResultsFactory->create();
+        $collection = $this->collectionFactory->create();
         $this->collectionProcessor->process($searchCriteria, $collection);
+        $searchResult->setItems($collection->getItems());
+        $searchResult->setTotalCount($collection->getSize());
 
-        $searchResults = $this->searchResultsFactory->create();
-        $searchResults->setSearchCriteria($searchCriteria);
-
-        $items = [];
-
-        foreach ($collection as $model) {
-            $items[] = $model;
-        }
-
-        $searchResults->setItems($items);
-        $searchResults->setTotalCount($collection->getSize());
-
-        return $searchResults;
+        return $searchResult;
     }
 
     /**

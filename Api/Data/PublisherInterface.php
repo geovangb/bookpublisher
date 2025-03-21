@@ -15,6 +15,7 @@ namespace GB\PublisherBook\Api\Data;
 
 interface PublisherInterface
 {
+    const MAIN_TABLE = 'gb_publisher_book';
     const UPDATED_AT = 'updated_at';
     const NAME = 'name';
     const CREATE_AT = 'create_at';
@@ -24,6 +25,9 @@ interface PublisherInterface
     const PUBLISHER_ID = 'publisher_id';
     const ENTITY_ID = 'entity_id';
     const LOGO = 'logo';
+
+    const STATUS_ACTIVE = '1';
+    const STATUS_INACTIVE = '0';
 
     /**
      * Get entity_id

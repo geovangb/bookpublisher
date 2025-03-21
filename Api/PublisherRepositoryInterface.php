@@ -37,11 +37,11 @@ interface PublisherRepositoryInterface
     public function getById(int $id);
 
     /**
-     * @param SearchCriteriaInterface $searchCriteria
+     * @param SearchCriteriaInterface $criteria
      * @return PublisherSearchResultsInterface
      */
     public function getList(
-        SearchCriteriaInterface $searchCriteria
+        SearchCriteriaInterface $criteria
     ): PublisherSearchResultsInterface;
 
     /**

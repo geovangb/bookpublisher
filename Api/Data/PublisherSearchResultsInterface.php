@@ -17,17 +17,16 @@ use Magento\Framework\Api\SearchResultsInterface;
 
 interface PublisherSearchResultsInterface extends SearchResultsInterface
 {
-
     /**
-     * Get Publisher list.
+     * Retorna a lista de editoras.
+     *
      * @return PublisherInterface[]
      */
-    public function getItems(): array;
+    public function getItems();
 
     /**
-     * Set entity_id list.
-     * @param PublisherInterface[] $items
-     * @return $this
+     * @param array $items
+     * @return void
      */
-    public function setItems(array $items): static;
+    public function setItems(array $items);
 }
