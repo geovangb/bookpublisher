@@ -7,6 +7,7 @@
                 <resource id="GB_PublisherBook::listing" title="Publisher Book"/>
                 <resource id="GB_PublisherBook::add" title="New Publisher Book"/>
                 <resource id="GB_PublihserBook::upload" title="Upload Logo"/>
+                <resource id="GB_PublihserBook::import" title="Import Editora"/>
             </resource>
         </resources>
     </acl>

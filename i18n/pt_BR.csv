@@ -32,4 +32,9 @@
 "We can\'t find a Publisher to delete.","Não conseguimos encontrar um editor para excluir."
 "Book Publisher has been saved","A editora de livros foi salva"
 "Are you sure you wan\'t to delete a %1 record?","Tem certeza de que deseja excluir um registro %1?"
-"Publisher with id "%1" does not exist.","A editora com id "%1" não existe.
+"Publisher with id "%1" does not exist.","A editora com id "%1" não existe."
+"Select Book Publisher","Selecione a Editora"
+"This command allows you to import book publisher...","Este comando permite que você importe o editor de livros..."
+"Publishers imported successfully.","Editoras importadas com sucesso."
+"No files uploaded.","Nenhum arquivo enviado."
+"Import Publisher","Importar Editora"

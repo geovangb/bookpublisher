@@ -12,7 +12,22 @@
 
 namespace GB\PublisherBook\Ui\DataProvider;
 
-class ImportFormProvider
-{
+use Magento\Ui\DataProvider\AbstractDataProvider;
 
+class ImportFormProvider extends AbstractDataProvider
+{
+    public function __construct(
+        $name,
+        $primaryFieldName,
+        $requestFieldName,
+        array $meta = [],
+        array $data = []
+    ) {
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+    }
+
+    public function getData()
+    {
+        return [];
+    }
 }

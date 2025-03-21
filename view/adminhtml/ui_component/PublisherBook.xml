@@ -9,6 +9,11 @@
     </argument>
     <settings>
         <buttons>
+            <button name="import">
+                <url path="*/*/impport"/>
+                <class>primary</class>
+                <label translate="true">Import Publisher</label>
+            </button>
             <button name="add">
                 <url path="*/*/add"/>
                 <class>primary</class>
