@@ -19,8 +19,16 @@ use Magento\Framework\App\ResourceConnection;
 
 class BookPublisher extends AbstractSource
 {
-    protected $resource;
+    /**
+     * @var ResourceConnection
+     */
+    protected ResourceConnection $resource;
 
+    /**
+     * Options Attribute book_publisher in Catalog Products
+     *
+     * @param ResourceConnection $resource
+     */
     public function __construct(
         ResourceConnection $resource
     ) {

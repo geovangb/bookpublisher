@@ -16,6 +16,11 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 class Publisher extends AbstractDb
 {
+    /**
+     * Resource Model Book Publisher
+     *
+     * @return void
+     */
     protected function _construct()
     {
         $this->_init('gb_publisher_book', 'entity_id');

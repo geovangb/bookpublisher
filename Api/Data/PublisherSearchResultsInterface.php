@@ -18,13 +18,15 @@ use Magento\Framework\Api\SearchResultsInterface;
 interface PublisherSearchResultsInterface extends SearchResultsInterface
 {
     /**
-     * Retorna a lista de editoras.
+     * Return List Items.
      *
      * @return PublisherInterface[]
      */
     public function getItems();
 
     /**
+     * Set Items
+     *
      * @param array $items
      * @return void
      */

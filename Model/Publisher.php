@@ -12,13 +12,19 @@
 
 namespace GB\PublisherBook\Model;
 
+use GB\PublisherBook\Api\Data\PublisherInterface;
 use Magento\Framework\Model\AbstractModel;
 use GB\PublisherBook\Model\ResourceModel\Publisher as PublisherResource;
 
-class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\PublisherInterface
+class Publisher extends AbstractModel implements PublisherInterface
 {
-    const CACHE_TAG = 'publisher_id';
+    public const CACHE_TAG = 'publisher_id';
 
+    /**
+     * Model Book Publisher
+     *
+     * @return void
+     */
     protected function _construct()
     {
         $this->_init(PublisherResource::class);
@@ -35,6 +41,11 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
         return $this->_objectManager->create($this->_instanceName, $data);
     }
 
+    /**
+     * Get Identities
+     *
+     * @return string[]
+     */
     public function getIdentities()
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
@@ -51,7 +62,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getData(self::NAME);
     }
@@ -59,7 +70,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setName($name)
+    public function setName(string $name): PublisherInterface
     {
         return $this->setData(self::NAME, $name);
     }
@@ -67,7 +78,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->getData(self::STATUS);
     }
@@ -75,7 +86,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setStatus($status)
+    public function setStatus(int $status): int
     {
         return $this->setData(self::STATUS, $status);
     }
@@ -83,7 +94,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->getData(self::ADDRESS);
     }
@@ -91,7 +102,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setAddress($address)
+    public function setAddress(string $address): string
     {
         return $this->setData(self::ADDRESS, $address);
     }
@@ -107,7 +118,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setLogo($logo)
+    public function setLogo(string $logo): Publisher
     {
         return $this->setData(self::LOGO, $logo);
     }
@@ -115,7 +126,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function getCnpj()
+    public function getCnpj(): string
     {
         return $this->getData(self::CNPJ);
     }
@@ -123,7 +134,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setCnpj($cnpj)
+    public function setCnpj($cnpj): string
     {
         return $this->setData(self::CNPJ, $cnpj);
     }
@@ -131,7 +142,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function getCreateAt()
+    public function getCreateAt(): ?string
     {
         return $this->getData(self::CREATE_AT);
     }
@@ -139,7 +150,7 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setCreateAt($createAt)
+    public function setCreateAt($createAt): Publisher
     {
         return $this->setData(self::CREATE_AT, $createAt);
     }
@@ -155,9 +166,8 @@ class Publisher extends AbstractModel implements \GB\PublisherBook\Api\Data\Publ
     /**
      * @inheritDoc
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(string $updatedAt): Publisher
     {
         return $this->setData(self::UPDATED_AT, $updatedAt);
     }
-
 }

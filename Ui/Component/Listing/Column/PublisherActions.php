@@ -22,9 +22,12 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class PublisherActions extends Column
 {
 
-    const URL_PATH_EDIT = 'publisher_book/publisher/add';
-    const URL_PATH_DELETE = 'publisher_book/publisher/delete';
-    protected $urlBuilder;
+    public const URL_PATH_EDIT = 'publisher_book/publisher/add';
+    public const URL_PATH_DELETE = 'publisher_book/publisher/delete';
+    /**
+     * @var UrlInterface
+     */
+    protected UrlInterface $urlBuilder;
 
     /**
      * @param ContextInterface $context

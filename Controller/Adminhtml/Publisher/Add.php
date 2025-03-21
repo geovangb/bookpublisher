@@ -21,17 +21,27 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
 class Add extends Action implements HttpGetActionInterface
-
 {
     /**
      * Authorization level of a basic admin session
      */
     public const ADMIN_RESOURCE = 'GB_PublisherBook::add';
 
-    protected $resultPageFactory;
+    /**
+     * @var PageFactory
+     */
+    protected PageFactory $resultPageFactory;
 
-    public function __construct(Context $context, PageFactory $resultPageFactory)
-    {
+    /**
+     * Block Form Book Publisher
+     *
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
+    public function __construct(
+        Context $context,
+        PageFactory $resultPageFactory
+    ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
     }
@@ -47,6 +57,7 @@ class Add extends Action implements HttpGetActionInterface
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('GB_PublisherBook::listing');
         $resultPage->getConfig()->getTitle()->prepend(__('New Publisher Book'));
+
         return $resultPage;
     }
 }

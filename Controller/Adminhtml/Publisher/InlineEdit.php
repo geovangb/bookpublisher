@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace GB\PublisherBook\Controller\Adminhtml\Publisher;
 
+use Exception;
+use GB\PublisherBook\Api\Data\PublisherInterface;
+use GB\PublisherBook\Api\PublisherRepositoryInterface;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\JsonFactory;
@@ -22,20 +25,32 @@ use Magento\Framework\Exception\LocalizedException;
 class InlineEdit extends Action
 {
 
-    protected $jsonFactory;
-    protected \GB\PublisherBook\Api\PublisherRepositoryInterface $publisherRepository;
-    protected \GB\PublisherBook\Api\Data\PublisherInterface $publisher;
+    /**
+     * @var JsonFactory
+     */
+    protected JsonFactory $jsonFactory;
+    /**
+     * @var PublisherRepositoryInterface
+     */
+    protected PublisherRepositoryInterface $publisherRepository;
+    /**
+     * @var PublisherInterface
+     */
+    protected PublisherInterface $publisher;
 
     /**
+     * Edit inLine
+     *
      * @param Context $context
      * @param JsonFactory $jsonFactory
-     * @param \GB\PublisherBook\Api\PublisherRepositoryInterface $publisherRepository
+     * @param PublisherInterface $publisher
+     * @param PublisherRepositoryInterface $publisherRepository
      */
     public function __construct(
         Context $context,
         JsonFactory $jsonFactory,
-        \GB\PublisherBook\Api\Data\PublisherInterface $publisher,
-        \GB\PublisherBook\Api\PublisherRepositoryInterface $publisherRepository
+        PublisherInterface $publisher,
+        PublisherRepositoryInterface $publisherRepository
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
@@ -57,17 +72,24 @@ class InlineEdit extends Action
 
         if ($this->getRequest()->getParam('isAjax')) {
             $postItems = $this->getRequest()->getParam('items', []);
+
             if (!count($postItems)) {
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
                 foreach (array_keys($postItems) as $publisherId) {
-
                     $model = $this->publisherRepository->getById($publisherId);
                     try {
-                        $model->setData(array_merge($model->getData(), $postItems[$publisherId]));
+                        $modelData = $model->getData();
+
+                        if (isset($postItems[$publisherId])) {
+                            $modelData = array_merge_recursive($modelData, $postItems[$publisherId]);
+                        }
+
+                        $model->setData($modelData);
                         $this->publisherRepository->save($model);
-                    } catch (\Exception $e) {
+
+                    } catch (Exception $e) {
                         $messages[] = "[Publisher ID: {$publisherId}]  {$e->getMessage()}";
                         $error = true;
                     }

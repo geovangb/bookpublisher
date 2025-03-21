@@ -27,8 +27,17 @@ class Grid extends Action implements HttpGetActionInterface
      */
     public const ADMIN_RESOURCE = 'GB_PublisherBook::listing';
 
-    protected $resultPageFactory;
+    /**
+     * @var PageFactory
+     */
+    protected PageFactory $resultPageFactory;
 
+    /**
+     * Grid Controller
+     *
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
     public function __construct(Context $context, PageFactory $resultPageFactory)
     {
         parent::__construct($context);

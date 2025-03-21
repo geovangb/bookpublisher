@@ -15,114 +15,128 @@ namespace GB\PublisherBook\Api\Data;
 
 interface PublisherInterface
 {
-    const MAIN_TABLE = 'gb_publisher_book';
-    const UPDATED_AT = 'updated_at';
-    const NAME = 'name';
-    const CREATE_AT = 'create_at';
-    const ADDRESS = 'address';
-    const STATUS = 'status';
-    const CNPJ = 'cnpj';
-    const PUBLISHER_ID = 'publisher_id';
-    const ENTITY_ID = 'entity_id';
-    const LOGO = 'logo';
+    public const MAIN_TABLE = 'gb_publisher_book';
+    public const UPDATED_AT = 'updated_at';
+    public const NAME = 'name';
+    public const CREATE_AT = 'create_at';
+    public const ADDRESS = 'address';
+    public const STATUS = 'status';
+    public const CNPJ = 'cnpj';
+    public const ENTITY_ID = 'entity_id';
+    public const LOGO = 'logo';
 
-    const STATUS_ACTIVE = '1';
-    const STATUS_INACTIVE = '0';
+    public const STATUS_ACTIVE = '1';
+    public const STATUS_INACTIVE = '0';
 
     /**
-     * Get entity_id
-     * @return string|null
+     * Get  Entity ID
+     *
+     * @return int
      */
     public function getEntityId(): int;
 
     /**
      * Get name
+     *
      * @return string|null
      */
     public function getName();
 
     /**
-     * Set name
+     * Set Name
+     *
      * @param string $name
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
+     * @return PublisherInterface
      */
-    public function setName($name);
+    public function setName(string $name): PublisherInterface;
 
     /**
      * Get status
+     *
+     * @return int
+     */
+    public function getStatus(): int;
+
+    /**
+     * Set Status
+     *
+     * @param int $status
+     * @return int
+     */
+    public function setStatus(int $status): int;
+
+    /**
+     * Get Address
+     *
      * @return string|null
      */
-    public function getStatus();
+    public function getAddress(): ?string;
 
     /**
-     * Set status
-     * @param string $status
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
-     */
-    public function setStatus($status);
-
-    /**
-     * Get address
-     * @return string|null
-     */
-    public function getAddress();
-
-    /**
-     * Set address
+     * Set Address
+     *
      * @param string $address
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
+     * @return string
      */
-    public function setAddress($address);
+    public function setAddress(string $address): string;
 
     /**
      * Get logo
+     *
      * @return string|null
      */
     public function getLogo();
 
     /**
-     * Set logo
+     * Set Logo
+     *
      * @param string $logo
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
+     * @return mixed
      */
-    public function setLogo($logo);
+    public function setLogo(string $logo): mixed;
 
     /**
-     * Get cnpj
-     * @return string|null
+     * Get Cnpj
+     *
+     * @return mixed
      */
-    public function getCnpj();
+    public function getCnpj(): mixed;
 
     /**
-     * Set cnpj
+     * Set Cnpj
+     *
      * @param string $cnpj
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
+     * @return string
      */
-    public function setCnpj($cnpj);
+    public function setCnpj($cnpj): string;
 
     /**
      * Get create_at
+     *
      * @return string|null
      */
-    public function getCreateAt();
+    public function getCreateAt(): ?string;
 
     /**
      * Set create_at
+     *
      * @param string $createAt
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
+     * @return mixed
      */
-    public function setCreateAt($createAt);
+    public function setCreateAt($createAt): mixed;
 
     /**
      * Get updated_at
+     *
      * @return string|null
      */
     public function getUpdatedAt();
 
     /**
      * Set updated_at
+     *
      * @param string $updatedAt
-     * @return \GB\PublisherBook\Publisher\Api\Data\PublisherInterface
+     * @return mixed
      */
-    public function setUpdatedAt($updatedAt);
+    public function setUpdatedAt(string $updatedAt): mixed;
 }

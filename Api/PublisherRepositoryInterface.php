@@ -24,19 +24,26 @@ interface PublisherRepositoryInterface
 {
 
     /**
-     * Save Publisher
+     * Set Publisher Book
+     *
      * @param PublisherInterface $publisher
-     * @return PublisherInterface
-     * @throws LocalizedException
+     * @return mixed
      */
     public function save(
         PublisherInterface $publisher
-    );
+    ): mixed;
 
-
+    /**
+     * Get By Id
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function getById(int $id);
 
     /**
+     * Get List
+     *
      * @param SearchCriteriaInterface $criteria
      * @return PublisherSearchResultsInterface
      */
@@ -46,20 +53,22 @@ interface PublisherRepositoryInterface
 
     /**
      * Delete Publisher
+     *
      * @param PublisherInterface $publisher
      * @return bool true on success
      * @throws LocalizedException
      */
     public function delete(
         PublisherInterface $publisher
-    );
+    ): bool;
 
     /**
      * Delete Publisher by ID
+     *
      * @param string $publisherId
      * @return bool true on success
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
-    public function deleteById($publisherId);
+    public function deleteById($publisherId): bool;
 }

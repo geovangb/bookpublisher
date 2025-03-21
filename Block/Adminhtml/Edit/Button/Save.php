@@ -17,7 +17,12 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class Save extends GenericButton implements ButtonProviderInterface
 {
-    public function getButtonData()
+    /**
+     * Retrieve button data for UI component.
+     *
+     * @return array
+     */
+    public function getButtonData(): array
     {
         return [
             'label' => __('Save'),
@@ -31,7 +36,12 @@ class Save extends GenericButton implements ButtonProviderInterface
         ];
     }
 
-    public function getBackUrl()
+    /**
+     * Get the back URL for redirection.
+     *
+     * @return string
+     */
+    public function getBackUrl(): string
     {
         return $this->getUrl('../../save');
     }

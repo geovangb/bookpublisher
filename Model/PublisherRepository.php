@@ -26,16 +26,6 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-/**
- * GB Developer
- *
- * @category GB_Developer
- * @package  GB
- *
- * @copyright Copyright (c) 2025 GB Developer.
- *
- * @author Geovan Brambilla <geovangb@gmail.com>
- */
 class PublisherRepository implements PublisherRepositoryInterface
 {
 
@@ -63,7 +53,6 @@ class PublisherRepository implements PublisherRepositoryInterface
      * @var CollectionFactory
      */
     protected CollectionFactory $collectionFactory;
-
 
     /**
      * @param ResourcePublisher $resource
@@ -103,6 +92,8 @@ class PublisherRepository implements PublisherRepositoryInterface
     }
 
     /**
+     * Get By Enntity Id
+     *
      * @param int $id
      * @return mixed
      * @throws NoSuchEntityException

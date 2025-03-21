@@ -12,6 +12,7 @@
 
 namespace GB\PublisherBook\Ui\DataProvider\Listing;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use GB\PublisherBook\Model\ResourceModel\Publisher\CollectionFactory;
@@ -19,27 +20,45 @@ use Magento\Framework\UrlInterface;
 
 class Publisher extends AbstractDataProvider
 {
-    protected $loadedData;
-    private StoreManagerInterface $storeManger;
+    /**
+     * @var StoreManagerInterface
+     */
 
+    private StoreManagerInterface $storeManager;
+
+    /**
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
+     * @param CollectionFactory $collectionFactory
+     * @param StoreManagerInterface $storeManager
+     * @param array $meta
+     * @param array $data
+     */
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
+        string $name,
+        string $primaryFieldName,
+        string $requestFieldName,
         CollectionFactory $collectionFactory,
-        StoreManagerInterface $storeManger,
+        StoreManagerInterface $storeManager,
         array $meta = [],
         array $data = []
     ) {
         $this->collection = $collectionFactory->create();
 
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-        $this->storeManger = $storeManger;
+        $this->storeManager = $storeManager;
     }
 
+    /**
+     * Get Data Listing
+     *
+     * @throws NoSuchEntityException
+     */
     public function getData()
     {
-        $baseurl =  $this->storeManger->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
+        $baseurl =  $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
+
         if (isset($this->loadedData)) {
             return $this->loadedData;
         }
@@ -51,7 +70,7 @@ class Publisher extends AbstractDataProvider
             $img[0]['name'] = $temp['logo'];
             $img[0]['url'] = $baseurl . 'label/icon/' . $temp['logo'];
             $temp['logo'] = $img;
-            $this->loadedData[$item->getId()] = array_merge($item->getData(), $temp);
+            $this->loadedData[$item->getId()] = $temp;
         }
 
         return $this->loadedData;

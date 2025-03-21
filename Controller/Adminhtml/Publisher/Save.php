@@ -26,14 +26,39 @@ use GB\PublisherBook\Model\PublisherFactory;
 
 class Save extends Action implements HttpPostActionInterface
 {
-    const URL_GRID = 'publisher_book/publisher/grid';
-    const URL_FORM = 'publisher_book/publisher/add';
+    public const URL_GRID = 'publisher_book/publisher/grid';
+    public const URL_FORM = 'publisher_book/publisher/add';
+    /**
+     * @var PublisherFactory
+     */
     protected PublisherFactory $publisherFactory;
+    /**
+     * @var UploaderFactory
+     */
     protected UploaderFactory $uploaderFactory;
+    /**
+     * @var ImageUploader
+     */
     protected ImageUploader $imageUploader;
+    /**
+     * @var Publisher
+     */
     protected Publisher $publisherResourceModel;
+    /**
+     * @var ManagerInterface
+     */
     protected ManagerInterface $managerInterface;
 
+    /**
+     * Button Save action Admin Form Save Logo Book Publisher
+     *
+     * @param Action\Context $context
+     * @param PublisherFactory $publisherFactory
+     * @param UploaderFactory $uploaderFactory
+     * @param ImageUploader $imageUploader
+     * @param Publisher $publisherResourceModel
+     * @param ManagerInterface $managerInterface
+     */
     public function __construct(
         Action\Context $context,
         PublisherFactory $publisherFactory,
@@ -50,8 +75,9 @@ class Save extends Action implements HttpPostActionInterface
         $this->managerInterface = $managerInterface;
     }
 
-
     /**
+     * Execute Save Image
+     *
      * @return ResultInterface|ResponseInterface
      */
     public function execute(): ResultInterface|ResponseInterface

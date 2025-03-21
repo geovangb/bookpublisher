@@ -22,13 +22,12 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Validator\ValidateException;
 
-class AddBookPublisherProductAttribute implements DataPatchInterface {
-
+class AddBookPublisherProductAttribute implements DataPatchInterface
+{
     /**
      * @var ModuleDataSetupInterface
      */
-    private
-    ModuleDataSetupInterface $moduleDataSetup;
+    private ModuleDataSetupInterface $moduleDataSetup;
 
     /**
      * @var EavSetupFactory
@@ -42,19 +41,20 @@ class AddBookPublisherProductAttribute implements DataPatchInterface {
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
         EavSetupFactory          $eavSetupFactory
-    )
-    {
+    ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
     /**
+     * Method apply path data
+     *
      * @return void
      * @throws LocalizedException
      * @throws ValidateException
      */
-     public function apply(): void
-     {
+    public function apply(): void
+    {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
 
         $eavSetup->addAttribute(
@@ -81,6 +81,8 @@ class AddBookPublisherProductAttribute implements DataPatchInterface {
     }
 
     /**
+     * Revert Attribute
+     *
      * @return void
      */
     public function revert(): void
@@ -93,6 +95,8 @@ class AddBookPublisherProductAttribute implements DataPatchInterface {
     }
 
     /**
+     * Get Dependencies
+     *
      * @return array|string[]
      */
     public static function getDependencies()
