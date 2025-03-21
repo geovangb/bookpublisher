@@ -1,0 +1,11 @@
+<?php
+/** @var GB\PublisherBook\ViewModel\Publisher $viewModel */
+$viewModel = $block->getViewModel();
+$publisherName = $viewModel->getPublisherName();
+?>
+
+<?php if ($publisherName): ?>
+    <div class="publisher-info">
+        <strong>Editora:</strong> <?= $escaper->escapeHtml($publisherName) ?>
+    </div>
+<?php endif; ?>

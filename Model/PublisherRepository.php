@@ -20,11 +20,14 @@ use GB\PublisherBook\Api\Data\PublisherSearchResultsInterfaceFactory;
 use GB\PublisherBook\Api\PublisherRepositoryInterface;
 use GB\PublisherBook\Model\ResourceModel\Publisher as ResourcePublisher;
 use GB\PublisherBook\Model\ResourceModel\Publisher\CollectionFactory;
+use Magento\Catalog\Model\Product as ProductAlias;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Eav\Model\Config as EavConfig;
 
 class PublisherRepository implements PublisherRepositoryInterface
 {
@@ -53,6 +56,10 @@ class PublisherRepository implements PublisherRepositoryInterface
      * @var CollectionFactory
      */
     protected CollectionFactory $collectionFactory;
+    /**
+     * @var EavConfig
+     */
+    private EavConfig $eavConfig;
 
     /**
      * @param ResourcePublisher $resource
@@ -66,13 +73,15 @@ class PublisherRepository implements PublisherRepositoryInterface
         PublisherInterfaceFactory $publisherFactory,
         CollectionFactory $collectionFactory,
         PublisherSearchResultsInterfaceFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor
+        CollectionProcessorInterface $collectionProcessor,
+        EavConfig $eavConfig
     ) {
         $this->resource = $resource;
         $this->publisherFactory = $publisherFactory;
         $this->collectionFactory = $collectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->collectionProcessor = $collectionProcessor;
+        $this->eavConfig = $eavConfig;
     }
 
     /**
@@ -149,5 +158,32 @@ class PublisherRepository implements PublisherRepositoryInterface
     public function deleteById($publisherId): bool
     {
         return $this->delete($this->get((int)$publisherId));
+    }
+
+    /**
+     * Get Nname Attribute selected
+     * @return mixed
+     * @throws LocalizedException
+     */
+    public function getProductsWithPublisher(): mixed
+    {
+        $connection = $this->resource->getConnection();
+        $productCollection = $this->publisherFactory->create();
+
+        $attribute = $this->eavConfig->getAttribute(ProductAlias::ENTITY, 'book_publisher');
+        $attributeId = $attribute->getId();
+
+        $select = $productCollection->getSelect();
+        $select->join(
+            ['cpei' => $connection->getTableName('catalog_product_entity_int')],
+            "e.entity_id = cpei.entity_id AND cpei.attribute_id = {$attributeId}",
+            ['publisher_id' => 'cpei.value']
+        )->join(
+            ['gpb' => $connection->getTableName('gb_publisher_book')],
+            "cpei.value = gpb.publisher_id",
+            ['publisher_name' => 'gpb.name']
+        );
+
+        return $productCollection->getItems();
     }
 }
